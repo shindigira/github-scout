@@ -1,29 +1,53 @@
-# Create T3 App
+# GitHub Scout
+
+Uses Github API to explore your repos
 
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
-## What's next? How do I make an app with this?
+## Features
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- 🔍 **Repository Exploration** - Browse and analyze your GitHub repositories
+- 📊 **Data Visualization** - Interactive charts and metrics
+- 🎨 **Modern UI** - Built with Tailwind CSS and Next.js 15
+- 🚀 **Type Safety** - Full TypeScript integration with tRPC
+- 📱 **Responsive Design** - Works on all devices
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Tech Stack
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+- [Next.js 15](https://nextjs.org) - React framework with App Router
+- [TypeScript](https://typescriptlang.org) - Type safety
+- [tRPC](https://trpc.io) - Type-safe APIs
+- [Prisma](https://prisma.io) - Database ORM
+- [Tailwind CSS](https://tailwindcss.com) - Styling
+- [SQLite](https://sqlite.org) - Database (development)
+
+## Getting Started
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   bun install
+   ```
+
+3. Set up the database:
+   ```bash
+   bun run db:push
+   ```
+
+4. Start the development server:
+   ```bash
+   bun run dev
+   ```
+
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
 ## Learn More
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+To learn more about the [T3 Stack](https://create.t3.gg/), check out:
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+- [T3 Documentation](https://create.t3.gg/)
+- [T3 Stack GitHub](https://github.com/t3-oss/create-t3-app)
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+## Deployment
 
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+Follow the T3 deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker).
