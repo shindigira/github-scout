@@ -57,3 +57,5 @@ yarn-error.log*
 .specstory/
 .cursor/
 .cursorindexingignore
+# clerk configuration (can include secrets)
+/.clerk/

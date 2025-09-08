@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "biomejs.biome",
+    "bradlc.vscode-tailwindcss",
+    "ms-vscode.vscode-typescript-next",
+    "usernamehw.errorlens"
+  ],
+  "unwantedRecommendations": [
+    "esbenp.prettier-vscode",
+    "ms-vscode.vscode-eslint"
+  ]
+}
