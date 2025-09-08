@@ -1,8 +1,8 @@
 import '@/styles/globals.css';
-import { TRPCReactProvider } from '@/trpc/react';
 import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
 import { Geist } from 'next/font/google';
+import { TRPCReactProvider } from '@/trpc/react';
 
 export const metadata: Metadata = {
   title: 'Github Scout',
@@ -19,7 +19,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <ClerkProvider>
       <html lang="en" className={`${geist.variable}`}>
-        <body>
+        <body className="min-h-screen">
           <TRPCReactProvider>{children}</TRPCReactProvider>
         </body>
       </html>
