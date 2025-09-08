@@ -19,7 +19,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <ClerkProvider>
       <html lang="en" className={`${geist.variable}`}>
-        <body className="min-h-screen">
+        <body className="min-h-screen h-full">
           <TRPCReactProvider>{children}</TRPCReactProvider>
         </body>
       </html>
