@@ -3,6 +3,7 @@ import { ClerkProvider } from '@clerk/nextjs';
 import type { Metadata } from 'next';
 import { Geist } from 'next/font/google';
 import { TRPCReactProvider } from '@/trpc/react';
+import { HydrateClient } from '@/trpc/server';
 
 export const metadata: Metadata = {
   title: 'Github Scout',
@@ -20,7 +21,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <ClerkProvider>
       <html lang="en" className={`${geist.variable}`}>
         <body className="min-h-screen h-full">
-          <TRPCReactProvider>{children}</TRPCReactProvider>
+          <TRPCReactProvider>
+            <HydrateClient>{children}</HydrateClient>
+          </TRPCReactProvider>
         </body>
       </html>
     </ClerkProvider>

@@ -1,12 +1,13 @@
-// import { LatestPost } from "@/app/_components/post";
-import { HydrateClient } from '@/trpc/server';
+import { auth } from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
+import Dashboard from './dashboard/page';
 
 export default async function Home() {
-  return (
-    <HydrateClient>
-      <main className="">
-        <h1 className="text-red-500">GitHub Scout</h1>
-      </main>
-    </HydrateClient>
-  );
+  const { userId } = await auth();
+
+  if (!userId) {
+    return redirect('/sign-in');
+  }
+
+  return <Dashboard />;
 }
