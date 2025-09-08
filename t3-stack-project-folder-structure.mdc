@@ -1,0 +1,108 @@
+---
+description: Project Folder Structure
+alwaysApply: false
+---
+src/
+├─ app/
+│  ├─ (routes)/
+│  │  └─ dashboard/
+│  │     └─ page.tsx                      ← RSC (can prefetch via tRPC SSR helpers)
+│  ├─ api/
+│  │  └─ trpc/[trpc]/route.ts             ← tRPC App Router handler (fetch adapter)
+│  ├─ layout.tsx                          ← RSC (reads session; optional direct DAL read)
+│  └─ providers.tsx                       ← <TRPCReactProvider> + React Query provider
+│
+├─ components/
+│  ├─ server/
+│  │  └─ UserCard.tsx                     ← RSC (optionally call DAL directly)
+│  └─ client/
+│     └─ UpdateEmailForm.tsx              ← Client (uses tRPC mutations)
+│
+├─ server/
+│  ├─ api/
+│  │  ├─ trpc.ts                          ← initTRPC, procedures, middleware, ctx
+│  │  ├─ root.ts                          ← mergeRouters({ queries, mutations, subscriptions })
+│  │  └─ routers/
+│  │     ├─ queries/
+│  │     │  ├─ user.ts                    ← read-only endpoints → call DAL (pure reads)
+│  │     │  ├─ product.ts
+│  │     │  └─ org.ts
+│  │     ├─ mutations/
+│  │     │  ├─ user.ts                    ← write ops → call services (side-effects)
+│  │     │  ├─ product.ts
+│  │     │  └─ billing.ts
+│  │     └─ subscriptions/
+│  │        └─ events.ts                  ← observables (e.g., event bus, ws)
+│  ├─ auth/
+│  │  └─ index.ts                         ← getAuth() for ctx (NextAuth/Clerk adapter)
+│  └─ db/
+│     └─ index.ts                         ← PrismaClient singleton
+│
+├─ lib/
+│  ├─ dal/                                ← **Data Access Layer (READS)**
+│  │  ├─ user.ts                          ← (optional) cache() if called from RSC
+│  │  ├─ product.ts
+│  │  └─ org.ts
+│  ├─ services/                           ← domain services (compose DAL + writes)
+│  │  ├─ userService.ts                   ← NO cache(); validations, side-effects
+│  │  └─ billing.ts
+│  ├─ http.ts                             ← fetch wrappers (tags/revalidate if needed)
+│  └─ trpc/                               ← client-side helpers
+│     ├─ client.ts                        ← tRPC client + React Query link
+│     └─ react.ts                         ← `api` proxy + hooks generator
+│
+├─ utils/
+│  ├─ env.ts                              ← zod-validated env (server/client split)
+│  └─ types.ts
+│
+├─ styles/
+│  └─ globals.css
+│
+├─ prisma/
+│  ├─ schema.prisma
+│  └─ migrations/
+│
+└─ pages.d.ts                             ← next-env or ambient types if needed
+
+
+<!-- 📁 src/
+├── 📁 app/                    # Next.js App Router
+│   ├── 📁 api/trpc/[trpc]/   # tRPC App Router handler
+│   ├── layout.tsx            # Root layout
+│   ├── page.tsx              # Home page  
+│   └── providers.tsx         # TRPCReactProvider + React Query
+│
+├── 📁 components/            # React Components
+│   ├── 📁 client/           # Client Components (tRPC mutations)
+│   │   └── LatestPost.tsx   # Interactive form component
+│   └── 📁 server/           # Server Components (DAL calls)
+│
+├── 📁 server/               # Server-side code
+│   ├── 📁 api/             # tRPC setup
+│   │   ├── trpc.ts         # initTRPC, procedures, middleware, ctx
+│   │   ├── root.ts         # mergeRouters({ queries, mutations, subscriptions })
+│   │   └── 📁 routers/     # Organized by operation type
+│   │       ├── 📁 queries/ # read-only endpoints → call DAL
+│   │       ├── 📁 mutations/ # write ops → call services  
+│   │       └── 📁 subscriptions/ # observables
+│   ├── 📁 auth/           # Authentication setup
+│   │   └── index.ts       # getAuth() for ctx
+│   └── 📁 db/             # Database client
+│       └── index.ts       # PrismaClient singleton
+│
+├── 📁 lib/                 # Client-side utilities
+│   ├── 📁 dal/            # **Data Access Layer (READS)**
+│   │   └── post.ts        # cache() for pure reads
+│   ├── 📁 services/       # domain services (ready for future use)
+│   ├── 📁 trpc/          # client-side helpers  
+│   │   ├── client.ts     # tRPC server-side client
+│   │   ├── react.tsx     # `api` proxy + hooks generator
+│   │   └── query-client.ts # React Query setup
+│   └── http.ts           # fetch wrappers (tags/revalidate)
+│
+├── 📁 utils/              # Shared utilities
+│   ├── env.ts            # zod-validated env (server/client split)
+│   └── types.ts          # type definitions
+│
+└── 📁 styles/             # Global styles
+    └── globals.css       # Tailwind v4 with CSS variables -->

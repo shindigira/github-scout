@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
+import { getLatestPost } from "@/lib/dal/post";
 
 export const postRouter = createTRPCRouter({
 	hello: publicProcedure
@@ -21,11 +22,7 @@ export const postRouter = createTRPCRouter({
 			});
 		}),
 
-	getLatest: publicProcedure.query(async ({ ctx }) => {
-		const post = await ctx.db.post.findFirst({
-			orderBy: { createdAt: "desc" },
-		});
-
-		return post ?? null;
+	getLatest: publicProcedure.query(async () => {
+		return await getLatestPost();
 	}),
 });
