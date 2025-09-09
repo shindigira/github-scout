@@ -1,13 +1,13 @@
 import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
-import Dashboard from './dashboard/page';
 
-export default async function Home() {
+export default async function RootPage() {
   const { userId } = await auth();
 
   if (!userId) {
     return redirect('/sign-in');
   }
 
-  return <Dashboard />;
+  // If user is authenticated, redirect to sync-user to ensure data is synced
+  return redirect('/sync-user');
 }
